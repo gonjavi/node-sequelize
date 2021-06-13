@@ -4,7 +4,6 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
-app.use(require('./controllers/students'));
 
 const routes = require('./routes');
 
