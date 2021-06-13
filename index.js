@@ -6,32 +6,10 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(require('./controllers/students'));
 
-const { Sequelize } = require('sequelize');
+const routes = require('./routes');
 
-const sequelize = new Sequelize('University', 'javi', 'conexion.P9', {
-  host: 'localhost',
-  dialect: 'mssql',
-  dialectOptions: {
-    // Observe the need for this nested `options` field for MSSQL
-    options: {
-      // Your tedious options here
-      useUTC: false,
-      dateFirst: 1
-    }
-  }
-});
+app.use('/api', routes);
 
-const conect = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
-
-conect()
-
-app.listen(3001, function () {
-  console.log('Server is running in port 3001');
+app.listen(3000, function () {
+  console.log('Server is running in port 3000');
 });
